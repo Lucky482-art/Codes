@@ -1,20 +1,31 @@
 #include <iostream>
-#include <stack>
 using namespace std;
+
+#define MAX 100
+
+char stackArr[MAX];
+int top = -1;
+
+void push(char c){
+    stackArr[++top] = c;
+}
+
+char pop(){
+    return stackArr[top--];
+}
 
 int main(){
     string str;
     cout<<"Enter string: ";
-    getline(cin,str);
+    getline(cin, str);
 
-    stack<char> s;
-    for(char c: str) s.push(c);
+    // push all characters
+    for(int i=0;i<str.length();i++)
+        push(str[i]);
 
-    string rev="";
-    while(!s.empty()){
-        rev+=s.top();
-        s.pop();
-    }
+    // pop to reverse
+    for(int i=0;i<str.length();i++)
+        str[i] = pop();
 
-    cout<<"Reversed: "<<rev;
+    cout<<"Reversed string: "<<str;
 }
